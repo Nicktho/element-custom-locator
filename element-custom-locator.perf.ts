@@ -1,4 +1,4 @@
-import { step, TestSettings, By, Locator } from '@flood/element'
+import { step, TestSettings, By, Locator, Until } from '@flood/element'
 import { BaseLocator } from '@flood/element-core/dist/src/page/Locator'
 import { LocatorBuilder } from '@flood/element-core/dist/src/page/types'
 
@@ -33,6 +33,18 @@ export const settings: TestSettings = {
 export default () => {
 	step('Start', async browser => {
 		await browser.visit('https://challenge.flood.io')
+	})
+
+	step('Wait until with By', async browser => {
+		await browser.wait(
+			Until.elementIsVisible(By.css('#new_challenger > input.btn.btn-xl.btn-default')),
+		)
+	})
+
+	step('Wait until with customLocator', async browser => {
+		await browser.wait(
+			Until.elementIsVisible(customLocator('#new_challenger > input.btn.btn-xl.btn-default')),
+		)
 	})
 
 	step('Find with By', async browser => {
